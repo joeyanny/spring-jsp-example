@@ -24,3 +24,9 @@ The application is run using Jetty servlet container.
 ```
 mvn jetty:run
 ```
+
+Open a web browser and navigate to the following URL to view the web screens.
+
+```
+http://localhost:8080/users
+```

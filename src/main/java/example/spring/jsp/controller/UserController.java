@@ -23,11 +23,6 @@ public class UserController {
     @Autowired
     private User user;
 
-    @RequestMapping(method=RequestMethod.GET, value="/")
-    public String home(Model model) throws SQLException {
-        return "userdisplay";
-    }
-
     @RequestMapping(method=RequestMethod.GET, value="/users/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
