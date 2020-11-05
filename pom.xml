@@ -21,13 +21,6 @@
 			<version>1.4.185</version>
 		</dependency>
 
-		<!-- JSP standard tag library -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -58,13 +51,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
-
-		<!-- JaxB -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.7.1</version>
 		</dependency>
 	</dependencies>
 
