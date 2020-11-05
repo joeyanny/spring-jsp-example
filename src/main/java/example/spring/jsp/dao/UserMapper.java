@@ -12,19 +12,19 @@ import example.spring.jsp.model.User;
  */
 public class UserMapper implements RowMapper<User> {
 
-	/**
-	 * Map the data from the database to the user object
-	 */
-	public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		User user = new User();
-		user.setId(resultSet.getLong(UserTableKeys.ID));
-		user.setFirstName(resultSet.getString(UserTableKeys.FIRST_NAME));
-		user.setLastName(resultSet.getString(UserTableKeys.LAST_NAME));
-		user.setHouseNumber(resultSet.getString(UserTableKeys.HOUSE_NUMBER));
-		user.setStreet(resultSet.getString(UserTableKeys.STREET));
-		user.setCity(resultSet.getString(UserTableKeys.CITY));
-		user.setPostcode(resultSet.getString(UserTableKeys.POSTCODE));
+    /**
+     * Map the data from the database to the user object
+     */
+    public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+        User user = new User();
+        user.setId(resultSet.getLong(UserTableKeys.ID));
+        user.setFirstName(resultSet.getString(UserTableKeys.FIRST_NAME));
+        user.setLastName(resultSet.getString(UserTableKeys.LAST_NAME));
+        user.setHouseNumber(resultSet.getString(UserTableKeys.HOUSE_NUMBER));
+        user.setStreet(resultSet.getString(UserTableKeys.STREET));
+        user.setCity(resultSet.getString(UserTableKeys.CITY));
+        user.setPostcode(resultSet.getString(UserTableKeys.POSTCODE));
 
-		return user;
-	}
+        return user;
+    }
 }
