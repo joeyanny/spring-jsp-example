@@ -1,16 +1,14 @@
-package example.spring.jsp.model;
-
-import java.io.Serializable;
+package example.spring.jsp.dao;
 
 import org.springframework.stereotype.Component;
 
 /**
- * Data model defining the resource
+ * Data model defining the structure of the data source.
  */
 @Component
-public class User implements Serializable {
+public class UserEntity {
 
-    private Long id;
+	private Long id;
     private String firstName;
     private String lastName;
     private String houseNumber;

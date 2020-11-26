@@ -5,18 +5,16 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import example.spring.jsp.model.User;
-
 /**
  * Map data from the DB for a user
  */
-public class UserMapper implements RowMapper<User> {
+public class UserMapper implements RowMapper<UserEntity> {
 
     /**
      * Map the data from the database to the user object
      */
-    public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        User user = new User();
+    public UserEntity mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+    	UserEntity user = new UserEntity();
         user.setId(resultSet.getLong(UserTableKeys.ID));
         user.setFirstName(resultSet.getString(UserTableKeys.FIRST_NAME));
         user.setLastName(resultSet.getString(UserTableKeys.LAST_NAME));

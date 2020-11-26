@@ -25,4 +25,15 @@
     <bean id="userDao" class="example.spring.jsp.dao.UserDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
+	<bean id="userTransformer" class="example.spring.jsp.transformer.UserTransformer"></bean>
+
+	<bean id="userService" class="example.spring.jsp.service.UserService">
+		<property name="userDao" ref="userDao"/>
+		<property name="userTransformer" ref="userTransformer"/>
+	</bean>
+
+	<bean id="userController" class="example.spring.jsp.controller.UserController">
+		<property name="userService" ref="userService"/>
+	</bean>
 </beans>

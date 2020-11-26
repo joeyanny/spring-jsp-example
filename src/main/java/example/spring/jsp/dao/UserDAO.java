@@ -10,8 +10,6 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.StringUtils;
 
-import example.spring.jsp.model.User;
-
 /**
  * Data access object for integrating with the data source
  * for storing and retrieving user data.
@@ -33,7 +31,7 @@ public class UserDAO {
      * @return users
      * @throws SQLException
      */
-    public List<User> getUserList() throws SQLException {
+    public List<UserEntity> getUserList() throws SQLException {
         String query = String.format(GET_LIST, UserTableKeys.TABLE_NAME);
         return jdbcTemplate.query(query, new UserMapper());
     }
@@ -45,7 +43,7 @@ public class UserDAO {
      * @return user
      * @throws SQLException
      */
-    public User getUser(long id) throws SQLException {
+    public UserEntity getUser(long id) throws SQLException {
         String query = String.format(GET_ITEM, UserTableKeys.TABLE_NAME, UserTableKeys.ID, UserJdbcParameterKeys.ID);
 
         Map<String, Object> parameters = new HashMap<>();
@@ -61,7 +59,7 @@ public class UserDAO {
      * @param user
      * @throws SQLException
      */
-    public void saveUser(User user) throws SQLException {
+    public void saveUser(UserEntity user) throws SQLException {
         String keysList = StringUtils.arrayToCommaDelimitedString(UserTableKeys.getKeys().toArray());
         String namedParametersList = StringUtils.arrayToCommaDelimitedString(UserJdbcParameterKeys.getQueryFormattedNamedParameterKeys().toArray());
 
@@ -78,7 +76,7 @@ public class UserDAO {
      * @param user
      * @throws SQLException
      */
-    public void updateUser(long id, User user) throws SQLException {
+    public void updateUser(long id, UserEntity user) throws SQLException {
         List<String> keys = UserTableKeys.getKeys();
         String[] fields = new String[keys.size()];
         for(int i=0; i<keys.size(); i++) {
@@ -123,7 +121,7 @@ public class UserDAO {
      * 
      * @return parameters
      */
-    private Map<String, Object> getNamedParameters(User user) {
+    private Map<String, Object> getNamedParameters(UserEntity user) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put(UserJdbcParameterKeys.FIRST_NAME, user.getFirstName());
         parameters.put(UserJdbcParameterKeys.LAST_NAME, user.getLastName());
