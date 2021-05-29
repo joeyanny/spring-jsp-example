@@ -30,3 +30,12 @@ Open a web browser and navigate to the following URL to view the web screens.
 ```
 http://localhost:8080/users
 ```
+
+## Internationalisation
+The locale is defaulted to the user's locale in the session. To change locale append the name of the locale to the URL as a query parameter.
+
+```
+http://localhost:8082/users?locale=[locale]
+```
+
+This will load the matching `message_[locale].properties` from the resources folder.
