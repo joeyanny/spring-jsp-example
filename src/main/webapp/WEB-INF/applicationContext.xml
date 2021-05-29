@@ -13,9 +13,38 @@
     
     <mvc:annotation-driven />
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    
-     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- Add interceptors into the execution chain to intercept incoming requests before they reach the controller -->
+    <!-- <mvc:interceptors>
+        <bean id="traceabilityInterceptor" class="example.spring.jsp.interceptor.TraceabilityInterceptor"/>
+    </mvc:interceptors> -->
+
+    <!-- Internationalisation locale resolver -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
+
+    <!-- Enables changing of locale -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="locale"/>
+    </bean>
+
+    <!-- Defines property file prefix to look-up internationalisation messages -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="traceabilityInterceptor"/>
+                <ref bean="localeChangeInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="traceabilityInterceptor" class="example.spring.jsp.interceptor.TraceabilityInterceptor"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
         <property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MVCC=true;INIT=runscript from 'classpath:CreateTable.sql'"/>
         <property name="username" value="sa"/>
@@ -26,14 +55,19 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-	<bean id="userTransformer" class="example.spring.jsp.transformer.UserTransformer"></bean>
+    <bean id="userTransformer" class="example.spring.jsp.transformer.UserTransformer"></bean>
 
-	<bean id="userService" class="example.spring.jsp.service.UserService">
-		<property name="userDao" ref="userDao"/>
-		<property name="userTransformer" ref="userTransformer"/>
-	</bean>
+    <bean id="userService" class="example.spring.jsp.service.UserService">
+        <property name="userDao" ref="userDao"/>
+        <property name="userTransformer" ref="userTransformer"/>
+    </bean>
 
-	<bean id="userController" class="example.spring.jsp.controller.UserController">
-		<property name="userService" ref="userService"/>
-	</bean>
+    <bean id="userValidator" class="example.spring.jsp.validator.UserValidator">
+        <constructor-arg name="regex" value="[A-Za-z-\\s]+"/>
+    </bean>
+
+    <bean id="userController" class="example.spring.jsp.controller.UserController">
+        <property name="userService" ref="userService"/>
+        <property name="userValidator" ref="userValidator"/>
+    </bean>
 </beans>

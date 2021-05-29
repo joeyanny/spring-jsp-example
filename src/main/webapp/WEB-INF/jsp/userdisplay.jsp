@@ -4,50 +4,52 @@
 
 <html>
     <head>
-        <title>User Details</title>
+        <title><spring:message code="user.details.title"/></title>
         <link rel="stylesheet" href="/resources/css/user.css">
     </head>
     <body>
         <div id="menu">
             <form method="GET" action="/users/${user.id}/edit">
-                <input class="button" type="submit" value="Edit"/>
+                <input class="button" type="submit" id="edit" value="<spring:message code='menu.edit'/>"/>
             </form>
             <form method="GET" action="/users/${user.id}/delete">
-                <input class="button" type="submit" value="Delete"/>
+                <input class="button" type="submit" id="delete" value="<spring:message code='menu.delete'/>"/>
             </form>
             <form method="GET" action="/users">
-                <input class="button" type="submit" value="Cancel"/>
+                <input class="button" type="submit" id="cancel" value="<spring:message code='menu.cancel'/>"/>
             </form>
         </div>
 
         <div id="container">
             <div id="heading-container">
-                <h1>User Details</h1>
+                <h1><spring:message code="user.details.heading"/></h1>
             </div>
 
-            <div class="row">
-                <label class="thin">First Name:</label>
-                   <span class="input">${user.firstName}</span>
-            </div>
-            <div class="row">
-                <label class="thin">Last Name:</label>
-                <span class="input">${user.lastName}</span>
-            </div>
-            <div class="row">
-                <label class="thin">House Number:</label>
-                <span class="input">${user.houseNumber}</span>
-            </div>
-            <div class="row">
-                <label class="thin">Street:</label>
-                <span class="input">${user.street}</span>
-            </div>
-            <div class="row">
-                <label class="thin">City:</label>
-                <span class="input">${user.city}</span>
-            </div>
-            <div class="row">
-                <label class="thin">Postcode:</label>
-                <span class="input">${user.postcode}</span>
+            <div class="details">
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.firstname"/></label>
+                    <span class="details-value" id="first-name">${user.firstName}</span>
+                </div>
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.lastname"/></label>
+                    <span class="details-value" id="last-name">${user.lastName}</span>
+                </div>
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.housenumber"/></label>
+                    <span class="details-value" id="house-number">${user.houseNumber}</span>
+                </div>
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.street"/></label>
+                    <span class="details-value" id="street">${user.street}</span>
+                </div>
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.city"/></label>
+                    <span class="details-value" id="city">${user.city}</span>
+                </div>
+                <div class="details-row">
+                    <label class="details-label"><spring:message code="heading.postcode"/></label>
+                    <span class="details-value" id="postcode">${user.postcode}</span>
+                </div>
             </div>
         </div>
     </body>
