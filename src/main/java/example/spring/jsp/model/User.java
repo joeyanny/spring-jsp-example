@@ -13,7 +13,7 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
-    private String houseNumber;
+    private Long houseNumber;
     private String street;
     private String city;
     private String postcode;
@@ -42,11 +42,11 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getHouseNumber() {
+    public Long getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
+    public void setHouseNumber(Long houseNumber) {
         this.houseNumber = houseNumber;
     }
 

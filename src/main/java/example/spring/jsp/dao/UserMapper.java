@@ -18,7 +18,7 @@ public class UserMapper implements RowMapper<UserEntity> {
         user.setId(resultSet.getLong(UserTableKeys.ID));
         user.setFirstName(resultSet.getString(UserTableKeys.FIRST_NAME));
         user.setLastName(resultSet.getString(UserTableKeys.LAST_NAME));
-        user.setHouseNumber(resultSet.getString(UserTableKeys.HOUSE_NUMBER));
+        user.setHouseNumber(resultSet.getLong(UserTableKeys.HOUSE_NUMBER));
         user.setStreet(resultSet.getString(UserTableKeys.STREET));
         user.setCity(resultSet.getString(UserTableKeys.CITY));
         user.setPostcode(resultSet.getString(UserTableKeys.POSTCODE));
