@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.StringUtils;
 
@@ -15,6 +17,8 @@ import org.springframework.util.StringUtils;
  * for storing and retrieving user data.
  */
 public class UserDAO {
+
+    private static Logger LOG = LogManager.getLogger(UserDAO.class);
 
     private static String GET_LIST = "SELECT * FROM %s";
     private static String GET_ITEM = "SELECT * FROM %s WHERE %s = :%s";
@@ -33,6 +37,8 @@ public class UserDAO {
      */
     public List<UserEntity> getUserList() throws SQLException {
         String query = String.format(GET_LIST, UserTableKeys.TABLE_NAME);
+        LOG.debug("Query to get all users: " + query);
+
         return jdbcTemplate.query(query, new UserMapper());
     }
 
@@ -45,6 +51,7 @@ public class UserDAO {
      */
     public UserEntity getUser(long id) throws SQLException {
         String query = String.format(GET_ITEM, UserTableKeys.TABLE_NAME, UserTableKeys.ID, UserJdbcParameterKeys.ID);
+        LOG.debug("Query to get user: " + query);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put(UserJdbcParameterKeys.ID, id);
@@ -64,6 +71,7 @@ public class UserDAO {
         String namedParametersList = StringUtils.arrayToCommaDelimitedString(UserJdbcParameterKeys.getQueryFormattedNamedParameterKeys().toArray());
 
         String query = String.format(SAVE_ITEM, UserTableKeys.TABLE_NAME, keysList, namedParametersList);
+        LOG.debug("Query to save user: " + query);
 
         jdbcTemplate.update(query, getNamedParameters(user));
     }
@@ -84,6 +92,7 @@ public class UserDAO {
         }
 
         String query = String.format(UPDATE_ITEM, UserTableKeys.TABLE_NAME, StringUtils.arrayToCommaDelimitedString(fields), UserTableKeys.ID, UserJdbcParameterKeys.ID);
+        LOG.debug("Query to update user: " + query);
 
         Map<String, Object> parameters = getNamedParameters(user);
         parameters.put(UserJdbcParameterKeys.ID, id);
@@ -99,6 +108,7 @@ public class UserDAO {
      */
     public void deleteUser(long id) throws SQLException {
         String query = String.format(DELETE_ITEM, UserTableKeys.TABLE_NAME, UserTableKeys.ID, UserJdbcParameterKeys.ID);
+        LOG.debug("Query to delete user: " + query);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put(UserJdbcParameterKeys.ID, id);
